@@ -1,0 +1,15 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+}
+
+.panel {
+    background-color: #f2f2f2;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.panel a {
+    margin-right: 10px;
+}
