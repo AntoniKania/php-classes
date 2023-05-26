@@ -69,5 +69,49 @@ class CarTable {
             echo "No cars found.";
         }
     }
+
+    public static function validateForm($carData) {
+        $errors = [];
+
+        if (empty($carData['made'])) {
+            $errors['made'] = "Make is required.";
+        }
+
+        if (empty($carData['model'])) {
+            $errors['model'] = "Model is required.";
+        }
+
+        if (empty($carData['price'])) {
+            $errors['price'] = "Price is required.";
+        } elseif (!is_numeric($carData['price']) || $carData['price'] <= 0) {
+            $errors['price'] = "Invalid price.";
+        }
+
+        if (empty($carData['production_year'])) {
+            $errors['production_year'] = "Production year is required.";
+        } elseif (!is_numeric($carData['production_year']) || $carData['production_year'] <= 0) {
+            $errors['production_year'] = "Invalid production year.";
+        }
+
+        if (empty($carData['description'])) {
+            $errors['description'] = "Description is required.";
+        }
+
+        return $errors;
+    }
+
+    public static function insertCar($carData) {
+        $conn = self::getConnection();
+
+        $stmt = mysqli_prepare($conn, "INSERT INTO car (made, model, price, production_year, description) VALUES (?, ?, ?, ?, ?)");
+        mysqli_stmt_bind_param($stmt, 'ssdis', $carData['made'], $carData['model'], $carData['price'], $carData['production_year'], $carData['description']);
+
+        mysqli_stmt_execute($stmt);
+
+        $carId = mysqli_insert_id(self::$conn);
+        mysqli_stmt_close($stmt);
+
+        return $carId;
+    }
 }
 ?>

@@ -1,4 +1,5 @@
 <?php
+include('header.html');
 require_once('CarTable.php');
 
 if (isset($_GET['id'])) {
@@ -7,4 +8,5 @@ if (isset($_GET['id'])) {
 } else {
     echo "Invalid car ID.";
 }
+include('footer.html')
 ?>
