@@ -11,8 +11,6 @@ CREATE TABLE IF NOT EXISTS car(
     PRIMARY KEY (id)
 );
 
-
--- test to see if script was run
 INSERT INTO car(made, model, price, production_year, description) VALUES
 ('BMW', 'X5', 179000.00, 2017, 'Luxurious SUV with advanced features'),
 ('Mercedes-Benz', 'C-Class', 135000.00, 2019, 'Elegant sedan with a powerful engine'),
