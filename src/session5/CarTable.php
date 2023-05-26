@@ -26,6 +26,32 @@ class CarTable {
 
         if (mysqli_num_rows($result) > 0) {
             echo "<table>";
+            echo "<tr/><th>Id</th><th>Make</th><th>Model</th><th>Price</th><th>Production Year</th></tr>";
+
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>";
+                echo "<td><a href='car_details.php?id=" . $row['id'] . "'>" . $row['id'] . "</a></td>";
+                echo "<td>" . $row['made'] . "</td>";
+                echo "<td>" . $row['model'] . "</td>";
+                echo "<td>" . $row['price'] . "</td>";
+                echo "<td>" . $row['production_year'] . "</td>";
+                echo "</tr>";
+            }
+
+            echo "</table>";
+        } else {
+            echo "No cars found.";
+        }
+    }
+
+    public static function displayCarDetails($carId) {
+        $conn = self::getConnection();
+        $query = "SELECT * FROM car WHERE id = $carId";
+
+        $result = mysqli_query($conn, $query);
+
+        if (mysqli_num_rows($result) > 0) {
+            echo "<table>";
             echo "<tr><th>Make</th><th>Model</th><th>Price</th><th>Production Year</th><th>Description</th></tr>";
 
             while ($row = mysqli_fetch_assoc($result)) {
